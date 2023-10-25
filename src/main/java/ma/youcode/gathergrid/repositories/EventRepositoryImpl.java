@@ -7,7 +7,6 @@ import jakarta.transaction.Transactional;
 import ma.youcode.gathergrid.config.UserDatabase;
 import ma.youcode.gathergrid.domain.Event;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,7 +31,7 @@ public class EventRepositoryImpl implements EventRepository{
     }
 
     @Override
-    public void update(Event event) {
+    public void update(Optional<Event> event) {
         em.merge(event);
         em.flush();
     }

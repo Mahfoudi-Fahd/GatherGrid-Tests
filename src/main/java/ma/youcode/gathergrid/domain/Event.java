@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,6 +29,9 @@ public class Event {
 
     @Temporal(TemporalType.TIME)
     private Time hour;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private LocalDateTime dateTime;
 
     private String location;
 

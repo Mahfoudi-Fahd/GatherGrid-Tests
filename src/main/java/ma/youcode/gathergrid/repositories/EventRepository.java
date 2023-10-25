@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface EventRepository {
     public Event findById(long id);
     public void save(Event event);
-    public void update(Event event);
+    public void update(Optional<Event> event);
     public void delete(Event event);
     public List<Event> findAll();
 
