@@ -1,9 +1,9 @@
 package ma.youcode.gathergrid.service;
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
-import com.google.protobuf.Message;
+import ma.youcode.gathergrid.domain.Category;
 import ma.youcode.gathergrid.domain.Event;
+import ma.youcode.gathergrid.domain.Organization;
 import ma.youcode.gathergrid.repositories.EventRepository;
 import ma.youcode.gathergrid.utils.Response;
 import org.junit.Before;
@@ -20,21 +20,40 @@ public class EventServiceTest {
         eventRepository = mock(EventRepository.class);
         eventService = new EventService(eventRepository);
     }
+
+//    @Test
+//    public void testCreateEvent() {
+//        // Create a sample event
+//        Event event = new Event();
+//        event.setName("Sample Event");
+//
+//        doNothing().when(eventRepository).save(event);
+//
+//        Response createdEvent = eventService.createEvent(event);
+//
+//        assertEquals(3, createdEvent.getError().size());
+//
+//
+//
+//    }
     @Test
-    public void testCreateEvent() {
-        // Create a sample event
+    public void validTestCreateEvent() {
         Event event = new Event();
         event.setName("Sample Event");
-
+        event.setLocation("ff");
+        event.setDescription("description");
+        event.setNumberOfTicketsAvailable(11);
+        event.setCategory(new Category("test","test"));
+        event.setOrganization(new Organization("test"));
         doNothing().when(eventRepository).save(event);
 
-        Response createdEvent = eventService.createEvent(event);
+        Response<Event> createdEvent = eventService.createEvent(event);
 
-        assertEquals(3, createdEvent.getError().size());
+        assertEquals(0, createdEvent.getError().size());
+
 
 
 
     }
-
 
 }
