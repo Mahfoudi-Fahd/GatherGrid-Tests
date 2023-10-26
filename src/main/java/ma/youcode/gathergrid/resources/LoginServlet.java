@@ -14,16 +14,20 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import ma.youcode.gathergrid.domain.Event;
 import ma.youcode.gathergrid.domain.User;
+import ma.youcode.gathergrid.service.EventService;
 import ma.youcode.gathergrid.service.UserService;
 
 import java.io.IOException;
+import java.util.List;
 
 
 @WebServlet(name = "LoginServlet", value = "/login")
 public class LoginServlet extends HttpServlet {
     @Inject
     private SecurityContext securityContext ;
+
 
 
     @Override

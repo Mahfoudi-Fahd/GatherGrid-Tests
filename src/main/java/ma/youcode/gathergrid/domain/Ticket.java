@@ -27,6 +27,7 @@ public class Ticket {
     private TicketType ticketType;
 
     @ManyToOne
+    @JoinColumn(name = "event_id")
     private Event event;
 
     @ManyToOne

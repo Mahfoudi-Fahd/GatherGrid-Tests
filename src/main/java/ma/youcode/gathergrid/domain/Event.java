@@ -2,6 +2,7 @@ package ma.youcode.gathergrid.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import ma.youcode.gathergrid.service.EventDTO;
 
 import java.sql.Time;
 import java.time.LocalDateTime;
@@ -51,9 +52,6 @@ public class Event {
 
     @Column(name = "available_tickets")
     private int numberOfTicketsAvailable;
-
-
-
 
 
     @Override

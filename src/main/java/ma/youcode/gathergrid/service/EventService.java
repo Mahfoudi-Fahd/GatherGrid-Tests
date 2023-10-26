@@ -22,11 +22,13 @@ public class EventService {
     private List<Error> errors = new ArrayList<>();
 
     @Inject
+
     public EventService(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
     }
     public EventService() {
     }
+
 
 
     public boolean eventIsExist(long id) {
@@ -48,11 +50,20 @@ public class EventService {
 
 
     public void validate(Event event){
-        if( event.getName().isEmpty() || event.getLocation().isEmpty() || event.getDescription().isEmpty()){
+        if( event.getName()==null || event.getName().isEmpty() ||
+                event.getLocation() ==null || event.getLocation().isEmpty() ||
+                event.getDescription()==null || event.getDescription().isEmpty()){
             this.errors.add(new Error("All Fields are required"));
-        }else if(event.getCategory() == null || event.getOrganization() == null){
+        }
+        if(event.getCategory() == null ||
+                event.getCategory().getName()==null ||
+                event.getCategory().getName().isEmpty() ||
+                event.getOrganization() == null ||
+                event.getOrganization().getName()==null ||
+                event.getOrganization().getName().isEmpty()){
             this.errors.add(new Error("Invalid Category or organization"));
-        }else if( event.getNumberOfTicketsAvailable() < 10) this.errors.add(new Error("Invalid Number of places"));
+        }
+        if( event.getNumberOfTicketsAvailable() < 10) this.errors.add(new Error("Invalid Number of places"));
     }
 
     public Response<List<Event>> getAllEvents(){
@@ -77,7 +88,7 @@ public class EventService {
             validate(event);
             if(!this.errors.isEmpty()) eventResponse.setError(this.errors);
             else {
-                eventRepository.update(event);
+                eventRepository.update(Optional.of(event));
                 eventResponse.setResult(event);
             }
         }
@@ -101,6 +112,8 @@ public class EventService {
                 .filter(ticketPack -> ticketPack.getTicketType().equals(ticketType))
                 .findAny()
                 .ifPresent(ticketPack -> ticketPack.setQuantity(ticketPack.getQuantity() + increment));
-        eventRepository.update(event);
+        eventRepository.update(Optional.of(event));
     }
+
+
 }
